@@ -5,19 +5,29 @@ import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink, Link } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Inventory from "./pages/Inventory";
 import Waste from "./pages/Waste";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
-import Dashboard from "./pages/Dashboard";
 import { ThemeProvider } from "next-themes";
 import { InventoryProvider } from "@/context/InventoryContext";
-import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { LayoutDashboard, Package, Trash2, BarChart3, Settings as Cog } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -42,36 +52,36 @@ const App = () => (
                     <SidebarGroupContent>
                       <SidebarMenu>
                         <SidebarMenuItem>
-                          <SidebarMenuButton asChild isActive>
-                            <NavLink to="/" end className={({isActive})=> isActive?"data-[active=true]":""}>
+                          <SidebarMenuButton asChild>
+                            <NavLink to="/" end className={({ isActive }) => (isActive ? "data-[active=true]" : "")}>
                               <LayoutDashboard /> <span>Dashboard</span>
                             </NavLink>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
                           <SidebarMenuButton asChild>
-                            <NavLink to="/inventory" className={({isActive})=> isActive?"data-[active=true]":""}>
+                            <NavLink to="/inventory" className={({ isActive }) => (isActive ? "data-[active=true]" : "")}>
                               <Package /> <span>Inventory</span>
                             </NavLink>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
                           <SidebarMenuButton asChild>
-                            <NavLink to="/waste" className={({isActive})=> isActive?"data-[active=true]":""}>
+                            <NavLink to="/waste" className={({ isActive }) => (isActive ? "data-[active=true]" : "")}>
                               <Trash2 /> <span>Waste</span>
                             </NavLink>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
                           <SidebarMenuButton asChild>
-                            <NavLink to="/reports" className={({isActive})=> isActive?"data-[active=true]":""}>
+                            <NavLink to="/reports" className={({ isActive }) => (isActive ? "data-[active=true]" : "")}>
                               <BarChart3 /> <span>Reports</span>
                             </NavLink>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
                           <SidebarMenuButton asChild>
-                            <NavLink to="/settings" className={({isActive})=> isActive?"data-[active=true]":""}>
+                            <NavLink to="/settings" className={({ isActive }) => (isActive ? "data-[active=true]" : "")}>
                               <Cog /> <span>Settings</span>
                             </NavLink>
                           </SidebarMenuButton>
@@ -112,4 +122,4 @@ const App = () => (
   </QueryClientProvider>
 );
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")).render(<App />);

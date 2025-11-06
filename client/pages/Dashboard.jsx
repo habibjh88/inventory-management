@@ -87,14 +87,14 @@ export default function Dashboard() {
   );
 }
 
-function Stat({ title, value }: { title: string; value: number }) {
+function Stat({ title, value }) {
   return (
     <Card className="bg-gradient-to-br from-emerald-50 to-transparent dark:from-emerald-950/30">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm text-muted-foreground">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">{value.toLocaleString()}</div>
+        <div className="text-2xl font-bold">{Number(value).toLocaleString()}</div>
       </CardContent>
     </Card>
   );
@@ -160,7 +160,7 @@ function AddFoodDialog() {
               addFood({
                 name: form.name,
                 category: form.category,
-                unit: form.unit as any,
+                unit: form.unit,
                 initialQty: Math.max(0, Number(form.initialQty) || 0),
                 dateAdded: new Date(form.dateAdded).toISOString(),
               });

@@ -1,5 +1,5 @@
-export function exportToCsv(filename: string, rows: (string | number)[][]) {
-  const processRow = (row: (string | number)[]) =>
+export function exportToCsv(filename, rows) {
+  const processRow = (row) =>
     row
       .map((val) => {
         let inner = String(val ?? "");

@@ -3,11 +3,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { statusOf, remainingOf } from "@/utils/calculations";
 import { Plus, PencilLine, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function Inventory() {
@@ -77,7 +76,7 @@ export default function Inventory() {
   );
 }
 
-function AddFoodDialog({ categories, onSave }: { categories: string[]; onSave: (f: any) => void }) {
+function AddFoodDialog({ categories, onSave }) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ name: "", category: categories[0] || "Produce", unit: "pcs", initialQty: 0, dateAdded: new Date().toISOString().slice(0,10) });
   return (
@@ -131,7 +130,7 @@ function AddFoodDialog({ categories, onSave }: { categories: string[]; onSave: (
   );
 }
 
-function EditSoldDialog({ current, max, onSave }: { current: number; max: number; onSave: (n: number) => void }) {
+function EditSoldDialog({ current, max, onSave }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(current);
   return (
@@ -155,7 +154,7 @@ function EditSoldDialog({ current, max, onSave }: { current: number; max: number
   );
 }
 
-function WasteDialog({ foodId, foodName, reasons, max, onSave }: { foodId: string; foodName: string; reasons: string[]; max: number; onSave: (q:number, r:string, d?:string)=>void }) {
+function WasteDialog({ foodId, foodName, reasons, max, onSave }) {
   const [open, setOpen] = useState(false);
   const [qty, setQty] = useState(0);
   const [reason, setReason] = useState(reasons[0] || "Expired");

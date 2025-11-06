@@ -1,32 +1,10 @@
-export type Unit = "pcs" | "kg" | "liters";
-
-export type FoodItem = {
-  id: string;
-  name: string;
-  category: string;
-  unit: Unit;
-  dateAdded: string; // ISO string
-  initialQty: number;
-  soldQty: number;
-  wasteQty: number;
-};
-
-export type WasteEntry = {
-  id: string;
-  foodId: string;
-  foodName: string;
-  quantity: number;
-  reason: string;
-  date: string; // ISO string
-};
-
 export const defaultCategories = [
   "Produce",
   "Bakery",
   "Dairy",
   "Meat",
   "Beverages",
-  "Prepared"
+  "Prepared",
 ];
 
 export const defaultReasons = [
@@ -34,10 +12,10 @@ export const defaultReasons = [
   "Damaged",
   "Spoiled",
   "Broken",
-  "Returned"
+  "Returned",
 ];
 
-export const initialFoods: FoodItem[] = [
+export const initialFoods = [
   {
     id: "f-apple",
     name: "Apples",
@@ -100,7 +78,7 @@ export const initialFoods: FoodItem[] = [
   },
 ];
 
-export const initialWasteLogs: WasteEntry[] = [
+export const initialWasteLogs = [
   {
     id: "w1",
     foodId: "f-bread",
@@ -127,4 +105,4 @@ export const initialWasteLogs: WasteEntry[] = [
   },
 ];
 
-export const defaultThreshold = 10; // warn when remaining < 10
+export const defaultThreshold = 10;

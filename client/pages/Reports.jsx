@@ -3,7 +3,7 @@ import { useInventory } from "@/context/InventoryContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, Pie, PieChart, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { exportToCsv } from "@/utils/export";
 import { remainingOf } from "@/utils/calculations";
 
@@ -12,8 +12,7 @@ export default function Reports(){
 
   const soldVsWaste = useMemo(()=>{
     const today = new Date().toISOString().slice(0,10);
-    const map = new Map<string, { date: string; sold: number; waste: number }>();
-    // Use waste dates; sold is only known as current totals.
+    const map = new Map();
     for (const w of waste) {
       const d = w.date.slice(0,10);
       const prev = map.get(d) || { date: d, sold: 0, waste: 0 };
@@ -28,7 +27,7 @@ export default function Reports(){
   }, [foods, waste]);
 
   const remainingByCategory = useMemo(()=>{
-    const map = new Map<string, number>();
+    const map = new Map();
     for (const f of foods) map.set(f.category, (map.get(f.category)||0) + remainingOf(f));
     return Array.from(map, ([category, remaining]) => ({ category, remaining }));
   }, [foods]);
@@ -40,12 +39,12 @@ export default function Reports(){
   }, [foods]);
 
   const exportFoods = () => {
-    const rows: (string|number)[][] = [["Name","Category","Unit","Initial","Sold","Waste","Remaining","Date Added"]];
+    const rows = [["Name","Category","Unit","Initial","Sold","Waste","Remaining","Date Added"]];
     for (const f of foods) rows.push([f.name, f.category, f.unit, f.initialQty, f.soldQty, f.wasteQty, remainingOf(f), new Date(f.dateAdded).toLocaleDateString()]);
     exportToCsv("foods.csv", rows);
   };
   const exportWaste = () => {
-    const rows: (string|number)[][] = [["Food","Quantity","Reason","Date"]];
+    const rows = [["Food","Quantity","Reason","Date"]];
     for (const w of waste) rows.push([w.foodName, w.quantity, w.reason, new Date(w.date).toLocaleDateString()]);
     exportToCsv("waste.csv", rows);
   };

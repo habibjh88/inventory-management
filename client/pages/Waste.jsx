@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Trash2, Plus, X } from "lucide-react";
+import { X, Plus } from "lucide-react";
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 export default function Waste() {
   const { foods, waste, reasons, addWaste, removeWaste } = useInventory();
   const [open, setOpen] = useState(false);
-  const [filterReason, setFilterReason] = useState<string>("all");
+  const [filterReason, setFilterReason] = useState("all");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
@@ -28,7 +28,7 @@ export default function Waste() {
   }, [waste, filterReason, from, to]);
 
   const summary = useMemo(() => {
-    const map = new Map<string, number>();
+    const map = new Map();
     for (const w of filtered) map.set(w.reason, (map.get(w.reason) || 0) + w.quantity);
     return Array.from(map, ([reason, total]) => ({ reason, total }));
   }, [filtered]);
@@ -124,7 +124,7 @@ export default function Waste() {
   );
 }
 
-function AddWasteDialog({ open, setOpen, foods, reasons, onSave }:{ open:boolean; setOpen:(v:boolean)=>void; foods: {id:string; name:string; }[]; reasons:string[]; onSave:(p:{foodId:string; quantity:number; reason:string; date?:string;})=>void }){
+function AddWasteDialog({ open, setOpen, foods, reasons, onSave }){
   const [foodId, setFoodId] = useState(foods[0]?.id || "");
   const [qty, setQty] = useState(0);
   const [reason, setReason] = useState(reasons[0] || "Expired");
